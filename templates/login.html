@@ -47,6 +47,13 @@
 
     <div class="py-2 bg-light">
       <div class="container">
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
         <div class="row align-items-center">
           <div class="col-lg-9 d-none d-lg-block">
             <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Have a questions?</a> 
@@ -86,7 +93,7 @@
                   <a href="admissions.html" class="nav-link text-left">Admissions</a>
                 </li>
                 <li>
-                  <a href="courses.html" class="nav-link text-left">Courses</a>
+                  <a href="../courses/" class="nav-link text-left">Courses</a>
                 </li>
                 <li>
                     <a href="contact.html" class="nav-link text-left">Contact</a>
@@ -135,17 +142,19 @@
     <div class="site-section">
         <div class="container">
 
-
+            <form method="post">
+                {% csrf_token %}
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <div class="row">
                         <div class="col-md-12 form-group">
+
                             <label for="username">Username</label>
-                            <input type="text" id="username" class="form-control form-control-lg">
+                            <input type="text" name="username" id="username" class="form-control form-control-lg">
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="pword">Password</label>
-                            <input type="text" id="pword" class="form-control form-control-lg">
+                            <input type="password" name="password" id="pword" class="form-control form-control-lg">
                         </div>
                     </div>
                     <div class="row">
@@ -155,7 +164,7 @@
                     </div>
                 </div>
             </div>
-            
+            </form>
 
           
         </div>
