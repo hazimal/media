@@ -8,8 +8,8 @@ def send_mail(user, to, link):
     try:
         mail_content = link
         # The mail addresses and password
-        sender_address = 'hazem.saideh@cdd.gov.jo'
-        sender_pass = 'ILV7ic112@'
+        sender_address = 'email'
+        sender_pass = 'password'
         receiver_address = to
         # Setup the MIME
         message = MIMEMultipart()
