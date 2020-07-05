@@ -3,9 +3,11 @@ from django.contrib.auth import authenticate, get_user_model, login, logout
 
 User = get_user_model()
 
+
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
     def clean(self, *args, **kwargs):
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
@@ -21,11 +23,11 @@ class UserLoginForm(forms.Form):
         return super(UserLoginForm, self).clean(*args, **kwargs)
 
 
-
 class UserRegisterForm(forms.ModelForm):
     email = forms.EmailField(label='E-mail Address')
     email2 = forms.EmailField(label='Confirm E-mail')
     password = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
         model = User
         fields = [
@@ -33,8 +35,7 @@ class UserRegisterForm(forms.ModelForm):
             'password',
             'email',
             'email2'
-            ]
-
+        ]
 
     def clean_email2(self):
         email = self.cleaned_data.get('email')

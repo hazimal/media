@@ -6,7 +6,7 @@ from django.utils import timezone
 # Create your models here.
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
-        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
+        return super(PostManager, self).filter().filter(publish__lte=timezone.now())
 
 class Course(models.Model):
     name = models.CharField(max_length=100)
@@ -40,8 +40,9 @@ class Student(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     student = models.BooleanField(default=True)
     add_date = models.DateTimeField(auto_created=True)
-    # class Meta:
-    #     model = User
+
+
+    objects = PostManager()
 
 
     def __str__(self):

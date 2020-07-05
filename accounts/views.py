@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect
 from .forms import UserLoginForm, UserRegisterForm
 from django.http import HttpResponse
 from django.template import loader
-from .models import Course
+from .models import Course, Student
+from .mailing import send_mail
 # Create your views here.
 MESSAGE_TAGS = {
     messages.SUCCESS: 'alert alert-success',
@@ -52,6 +53,16 @@ def index(request):
     context = {"hello": "hello"}
     return HttpResponse(template.render(context, request))
 
+
 def course_view(request):
     list_course = Course.objects.filter(name=request.user)
     return render(request, 'courses.html', {'data': list_course})
+
+
+def admissions_view(request):
+    list_course = Student.objects.all()
+    my_list = []
+    for i in list_course:
+        if "Mail Sent" == send_mail(i.name, i.email, "http://ok"):
+            my_list.append(i.name)
+    return render(request, 'admissions.html', {'data': my_list})
